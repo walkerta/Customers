@@ -6,34 +6,18 @@
 
 });
 // Your Code Goes Here
-fetch('https://randomuser.me/api/', 'https://randomuser.me/api/?results=12')
-$.ajax({
-      url: 'https://randomuser.me/api/',
-      dataType: 'json',
-      success: function(data) {
-          console.log(data);
-        }
+fetch('https://randomuser.me/api/?results=12')
+  .then(function(resonse) {
+    return response.json()
 
-        .then(
-          function(response) {
-            return response.randomuser();
-            console.log(response);
+  })
 
-            function(response) {
-              if (response.status !== 12) {
-                console.log(response.status);
-                return;
+  .then(function(json){
+    console.log (json)
 
-              })
-            .then(function(json) {
-              const firstUser = randomuser[0];
-              const name = firstUser.name;
-              const website = firstUser.website;
-              const address = firstUser.address;
-              const city = firstUser.city;
-              const state = firstUser.state;
-              const phone = firstUser.phone;
-
-              console.log(name, website, address, city, state, phone);
-
-            });
+      let result = json.results
+      result.map(function(user) {
+        console.log("Name: " + user.name.first)
+        console.log("Email: " + user.email)
+      })
+})
